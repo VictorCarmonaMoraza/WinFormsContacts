@@ -82,8 +82,9 @@ namespace WinFormsContacts
             this.btnAdd.TabIndex = 4;
             this.btnAdd.Text = "Add";
             this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
-            // Form1
+            // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -93,7 +94,7 @@ namespace WinFormsContacts
             this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.gridContacts);
-            this.Name = "Form1";
+            this.Name = "Main";
             this.Text = "Contacts";
             ((System.ComponentModel.ISupportInitialize)(this.gridContacts)).EndInit();
             this.ResumeLayout(false);

@@ -16,5 +16,11 @@ namespace WinFormsContacts
         {
             InitializeComponent();
         }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            //Como estamos en esta clase la podemos cerrar desde aqui
+            this.Close();
+        }
     }
 }

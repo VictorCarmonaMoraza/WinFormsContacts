@@ -16,5 +16,27 @@ namespace WinFormsContacts
         {
             InitializeComponent();
         }
+
+        #region EVENTS
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            OpenContactDetailsDialog();
+        }
+        #endregion
+
+
+
+        #region PRIVATE METHODS
+
+        private void OpenContactDetailsDialog()
+        {
+            //Creamos el objeto
+            ContactsDetails contactsDetails = new ContactsDetails();
+
+            contactsDetails.ShowDialog();
+        }
+
+        #endregion
+
     }
 }
