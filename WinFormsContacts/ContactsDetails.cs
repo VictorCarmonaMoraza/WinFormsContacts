@@ -35,6 +35,54 @@ namespace WinFormsContacts
         /// <param name="e"></param>
         private void btnSave_Click(object sender, EventArgs e)
         {
+            SaveContact();
+        }
+
+        #region PRIVATE METHODS
+
+        /// <summary>
+        /// Comprobamos si el telefono es nulo
+        /// </summary>
+        /// <returns></returns>
+        private string phoneIsNull()
+        {
+            string phone ="";
+
+            if (string.IsNullOrEmpty(txtPhone.Text))
+            {
+                phone = "Desconocido";
+            }
+            else
+            {
+                phone = txtPhone.Text;
+            }
+            return phone;
+        }
+
+        /// <summary>
+        /// Comprobamos si la direccion es esta vacia
+        /// </summary>
+        /// <returns></returns>
+        private string addressIsNull()
+        {
+            string address = "";
+
+            if (string.IsNullOrEmpty(txtAddress.Text))
+            {
+                address = "Desconocido";
+            }
+            else
+            {
+                address = txtPhone.Text;
+            }
+            return address;
+        }
+
+        /// <summary>
+        /// Metodo para guardar un contacto
+        /// </summary>
+        private void SaveContact()
+        {
             //1-Creamos un nuevo contacto
             Contact contact = new Contact();
 
@@ -42,27 +90,10 @@ namespace WinFormsContacts
             contact.FirstName = txtFirstName.Text;
             contact.LastName = txtLastName.Text;
             contact.Phone = phoneIsNull();
-            contact.Address = txtAddress.Text;
+            contact.Address = addressIsNull();
 
             //3-LLamaremos a la capa de negocio
-            //_businessLogicLayer
-            
-        }
-
-        #region PRIVATE METHODS
-        private string phoneIsNull()
-        {
-            string valor ="";
-
-            if (string.IsNullOrEmpty(txtPhone.Text))
-            {
-                valor = "Desconocido";
-            }
-            else
-            {
-                valor = txtPhone.Text;
-            }
-            return valor;
+            _businessLogicLayer.SaveContact(contact);
         }
 
         #endregion

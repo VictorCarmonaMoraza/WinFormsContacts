@@ -26,6 +26,7 @@ namespace WinFormsContacts.Capa_Negocio
             if(contact.Id == 0)
             {
                 //Crearemos un metodo para insertar yq eu llamaremos
+                _dataAccessLayer.InsertContact(contact);
             }
             //Es un Update
             else
