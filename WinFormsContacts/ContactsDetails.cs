@@ -36,6 +36,10 @@ namespace WinFormsContacts
         private void btnSave_Click(object sender, EventArgs e)
         {
             SaveContact();
+            //Cerramos el formulario de agregar un contacto
+            this.Close();
+            //Llamamos al padre de este formulario
+            ((Main)this.Owner).PopulateContacts();
         }
 
         #region PRIVATE METHODS

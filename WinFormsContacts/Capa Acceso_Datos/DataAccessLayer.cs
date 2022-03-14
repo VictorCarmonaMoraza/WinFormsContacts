@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WinFormsContacts.Interfaces;
 using WinFormsContacts.Model;
 
 namespace WinFormsContacts.Capa_Acceso_Datos
@@ -11,7 +12,7 @@ namespace WinFormsContacts.Capa_Acceso_Datos
     /// <summary>
     /// Accede a los datos y ejecua consultas
     /// </summary>
-    public class DataAccessLayer
+    public class DataAccessLayer: IAccesoDatos
     {
         private SqlConnection conn = new SqlConnection("Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=WinFormsContacts;Data Source=VICTORPC");
 
@@ -57,6 +58,52 @@ namespace WinFormsContacts.Capa_Acceso_Datos
             {
                 conn.Close();
             }
+        }
+
+        public List<Contact> GetContacts()
+        {
+
+            List<Contact> contacts = new List<Contact>();
+            try
+            {
+                //Abrimos conexion
+                conn.Open();
+
+                //Escribimos la query
+                string query = @"SELECT Id, FirstName, LastName, Phone, Address FROM Contacts";
+
+                //Consulta a ejecutar
+                SqlCommand command = new SqlCommand(query, conn);
+
+                //
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    contacts.Add(new Contact
+                    {
+                        Id = int.Parse(reader["Id"].ToString()),
+                        FirstName = reader["Firstname"].ToString(),
+                        LastName = reader["LastName"].ToString(),
+                        Phone = reader["Phone"].ToString(),
+                        Address = reader["Address"].ToString()
+                    });
+                }
+                reader.Close();
+
+                //Ejecutmos la query
+                command.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+            //Pase lo que pase retorno la lista de contactos
+            return contacts;
         }
     }
 
