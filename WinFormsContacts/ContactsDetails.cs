@@ -15,6 +15,7 @@ namespace WinFormsContacts
     public partial class ContactsDetails : Form
     {
         private BusinessLogicLayer _businessLogicLayer;
+        private Contact _contact;
 
         public ContactsDetails()
         {
@@ -77,7 +78,7 @@ namespace WinFormsContacts
             }
             else
             {
-                address = txtPhone.Text;
+                address = txtAddress.Text;
             }
             return address;
         }
@@ -96,8 +97,33 @@ namespace WinFormsContacts
             contact.Phone = phoneIsNull();
             contact.Address = addressIsNull();
 
+            contact.Id = _contact != null ? _contact.Id : 0;
+
             //3-LLamaremos a la capa de negocio
             _businessLogicLayer.SaveContact(contact);
+        }
+
+        public void LoadContact(Contact contact)
+        {
+            _contact = contact;
+
+            if(contact != null)
+            {
+                ClearForm();
+
+                txtFirstName.Text = contact.FirstName;
+                txtLastName.Text = contact.LastName;
+                txtPhone.Text = contact.Phone;
+                txtAddress.Text = contact.Address;
+            }
+        }
+
+        private void ClearForm()
+        {
+            txtFirstName.Text = string.Empty;
+            txtLastName.Text = string.Empty;
+            txtPhone.Text = string.Empty;
+            txtAddress.Text = string.Empty;
         }
 
         #endregion

@@ -54,6 +54,7 @@
     <Compile Include="ContactsDetails.Designer.cs">
       <DependentUpon>ContactsDetails.cs</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\IAccesoDatos.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>

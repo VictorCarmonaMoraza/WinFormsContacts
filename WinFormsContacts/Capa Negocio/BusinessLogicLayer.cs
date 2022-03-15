@@ -41,7 +41,7 @@ namespace WinFormsContacts.Capa_Negocio
             //Es un Update
             else
             {
-
+                _dataAccessLayer.UpdateContact(contact);
             }
             //para que no de error de momento
             return contact;
@@ -50,6 +50,11 @@ namespace WinFormsContacts.Capa_Negocio
         public List<Contact> listaContactos()
         {
             return  _dataAccessLayer.GetContacts();
+        }
+
+        public void DeleteContact(int id)
+        {
+            _dataAccessLayer.DeleteContact(id);
         }
     }
 }

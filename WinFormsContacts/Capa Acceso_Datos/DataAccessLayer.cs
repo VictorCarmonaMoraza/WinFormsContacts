@@ -105,6 +105,72 @@ namespace WinFormsContacts.Capa_Acceso_Datos
             //Pase lo que pase retorno la lista de contactos
             return contacts;
         }
+
+        public void UpdateContact(Contact contact)
+        {
+            try
+            {
+                conn.Open();
+
+                string query = @"UPDATE Contacts SET FirstName =@FirstName,
+                                LastName =@LastName, Phone=@Phone, Address =@Address
+                                WHERE Id=@Id";
+
+                //Parametros
+                SqlParameter id = new SqlParameter("@Id", contact.Id);
+                SqlParameter firstName = new SqlParameter("@FirstName", contact.FirstName);
+                SqlParameter lastName = new SqlParameter("@LastName", contact.LastName);
+                SqlParameter phone = new SqlParameter("@Phone", contact.Phone);
+                SqlParameter address = new SqlParameter("@Address", contact.Address);
+
+                //Consulta a ejecutar
+                SqlCommand command = new SqlCommand(query, conn);
+
+                command.Parameters.Add(id);
+                command.Parameters.Add(firstName);
+                command.Parameters.Add(lastName);
+                command.Parameters.Add(phone);
+                command.Parameters.Add(address);
+
+                //Ejecutmos la query
+                command.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        public void DeleteContact(int id)
+        {
+            try
+            {
+                conn.Open();
+
+                string query = @"DELETE FROM Contacts WHERE Id=@Id";
+
+                //Consulta a ejecutar
+                SqlCommand command = new SqlCommand(query, conn);
+                command.Parameters.Add(new SqlParameter("@Id", id));
+
+                //Ejecutmos la query
+                command.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
     }
 
     
